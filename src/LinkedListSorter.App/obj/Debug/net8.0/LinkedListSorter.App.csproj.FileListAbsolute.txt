@@ -1,0 +1,14 @@
+C:\Users\claud\source\Repos\C#\Non-Leetcode\LinkedListSorter\src\LinkedListSorter.App\bin\Debug\net8.0\LinkedListSorter.App.exe
+C:\Users\claud\source\Repos\C#\Non-Leetcode\LinkedListSorter\src\LinkedListSorter.App\bin\Debug\net8.0\LinkedListSorter.App.deps.json
+C:\Users\claud\source\Repos\C#\Non-Leetcode\LinkedListSorter\src\LinkedListSorter.App\bin\Debug\net8.0\LinkedListSorter.App.runtimeconfig.json
+C:\Users\claud\source\Repos\C#\Non-Leetcode\LinkedListSorter\src\LinkedListSorter.App\bin\Debug\net8.0\LinkedListSorter.App.dll
+C:\Users\claud\source\Repos\C#\Non-Leetcode\LinkedListSorter\src\LinkedListSorter.App\bin\Debug\net8.0\LinkedListSorter.App.pdb
+C:\Users\claud\source\Repos\C#\Non-Leetcode\LinkedListSorter\src\LinkedListSorter.App\obj\Debug\net8.0\LinkedListSorter.App.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\claud\source\Repos\C#\Non-Leetcode\LinkedListSorter\src\LinkedListSorter.App\obj\Debug\net8.0\LinkedListSorter.App.AssemblyInfoInputs.cache
+C:\Users\claud\source\Repos\C#\Non-Leetcode\LinkedListSorter\src\LinkedListSorter.App\obj\Debug\net8.0\LinkedListSorter.App.AssemblyInfo.cs
+C:\Users\claud\source\Repos\C#\Non-Leetcode\LinkedListSorter\src\LinkedListSorter.App\obj\Debug\net8.0\LinkedListSorter.App.csproj.CoreCompileInputs.cache
+C:\Users\claud\source\Repos\C#\Non-Leetcode\LinkedListSorter\src\LinkedListSorter.App\obj\Debug\net8.0\LinkedListSorter.App.dll
+C:\Users\claud\source\Repos\C#\Non-Leetcode\LinkedListSorter\src\LinkedListSorter.App\obj\Debug\net8.0\refint\LinkedListSorter.App.dll
+C:\Users\claud\source\Repos\C#\Non-Leetcode\LinkedListSorter\src\LinkedListSorter.App\obj\Debug\net8.0\LinkedListSorter.App.pdb
+C:\Users\claud\source\Repos\C#\Non-Leetcode\LinkedListSorter\src\LinkedListSorter.App\obj\Debug\net8.0\LinkedListSorter.App.genruntimeconfig.cache
+C:\Users\claud\source\Repos\C#\Non-Leetcode\LinkedListSorter\src\LinkedListSorter.App\obj\Debug\net8.0\ref\LinkedListSorter.App.dll
