@@ -34,14 +34,20 @@ namespace LinkedListSorter.App.LinkedList
             // TODO: Implement insertion logic
             Node newNode = new Node(value);
             if (head == null)
+            {
                 head = newNode;
-            
+                return;
+            }
+            // Otherwise, walked to the last node.
             Node current = head;
             while (current.Next is not null)// using the is not null instead of != null offers an advantage when dealing with nullable reference types and operator overloading. Learned this on .NET Tips on YouTube
             {
                 current = current.Next;
             }
-            current.Next = newNode;     
+
+            // Attach new node at the end;
+            current.Next = newNode;
+            
             
         }
 
@@ -55,6 +61,7 @@ namespace LinkedListSorter.App.LinkedList
             // First, determine the size of the linked list
             Node current = head;
             var count = 0;
+
             while (current is not null)
             {
                 count++;
@@ -78,19 +85,27 @@ namespace LinkedListSorter.App.LinkedList
         }
 
         // Sort the list in ascending order
-        public Node SortAscending(Node head)
+        public void SortAscending()
+        {
+            if (head is null || head.Next is null)
+                return;
+
+            head = SortAscendingInternal(head);
+        }
+        public Node SortAscendingInternal(Node node)
         {
             // TODO: Implement ascending sort logic
-            if (head is null || head.Next is null) return head;
+            if (node is null || node.Next is null) 
+                return node;
 
             // Split the list into two halves
-            Node mid = GetMiddle(head), 
+            Node mid = GetMiddle(node), 
             secondHalf = mid.Next;
             mid.Next = null; // Break the link
 
             // recursively sort the two halves
-            Node sortedFirstHalf = SortAscending(head);
-            Node sortedSecondHalf = SortAscending(secondHalf);
+            Node sortedFirstHalf = SortAscendingInternal(node);
+            Node sortedSecondHalf = SortAscendingInternal(secondHalf);
 
             // Merge the Sorted Halves
             return MergedSortedLists(sortedFirstHalf, sortedSecondHalf);

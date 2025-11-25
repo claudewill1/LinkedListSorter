@@ -13,7 +13,7 @@ namespace LinkedListSorter.Tests
         public void NewList_ShouldBeEmpty()
         {
             var list = new SinglyLinkedList();      // Create a new list
-            var values = list.ToArray<int>();            // Convert internal structure to array
+            var values = list.ToArray();            // Convert internal structure to array
 
             Assert.IsNotNull(values);               // Ensure the returned array is not null
             Assert.AreEqual(0, values.Length);      // Ensure the array is empty
@@ -26,7 +26,7 @@ namespace LinkedListSorter.Tests
             var list = new SinglyLinkedList();      
             list.InsertAtEnd(10);                   // Insert one value
 
-            var values = list.ToArray<int>();            // Read list back out
+            var values = list.ToArray();            // Read list back out
 
             Assert.AreEqual(1, values.Length);      // Should only contain one element
             Assert.AreEqual(10, values[0]);         // That element should be 10
@@ -43,7 +43,7 @@ namespace LinkedListSorter.Tests
             list.InsertAtEnd(2);
             list.InsertAtEnd(9);
 
-            var values = list.ToArray<int>();            // Convert to array for easy comparison
+            var values = list.ToArray();            // Convert to array for easy comparison
 
             // Expected order must match insertion order
             CollectionAssert.AreEqual(new[] { 5, 2, 9 }, values);
@@ -60,7 +60,7 @@ namespace LinkedListSorter.Tests
             list.InsertAtEnd(1);
 
             list.SortAscending();                   // Perform sort
-            var values = list.ToArray<int>();
+            var values = list.ToArray();
 
             // Validate sorted result
             CollectionAssert.AreEqual(new[] { 1, 2, 5, 9 }, values);
