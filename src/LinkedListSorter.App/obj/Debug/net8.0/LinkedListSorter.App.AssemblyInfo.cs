@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LinkedListSorter.App")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+29dc3f201b20acdb2b05b6d2a87e0e0c8d828ac7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bcbaaac3760b9bfd12b604ed24db977f5a9ed664")]
 [assembly: System.Reflection.AssemblyProductAttribute("LinkedListSorter.App")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LinkedListSorter.App")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

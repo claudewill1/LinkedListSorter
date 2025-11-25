@@ -272,3 +272,4 @@ C:\Users\claud\source\Repos\C#\Non-Leetcode\LinkedListSorter\tests\LinkedListSor
 C:\Users\claud\source\Repos\C#\Non-Leetcode\LinkedListSorter\tests\LinkedListSorter.Tests\obj\Debug\net8.0\LinkedListSorter.Tests.pdb
 C:\Users\claud\source\Repos\C#\Non-Leetcode\LinkedListSorter\tests\LinkedListSorter.Tests\obj\Debug\net8.0\LinkedListSorter.Tests.genruntimeconfig.cache
 C:\Users\claud\source\Repos\C#\Non-Leetcode\LinkedListSorter\tests\LinkedListSorter.Tests\obj\Debug\net8.0\ref\LinkedListSorter.Tests.dll
+C:\Users\claud\source\repos\C#\Non-Leetcode\LinkedListSorter\tests\LinkedListSorter.Tests\obj\Debug\net8.0\LinkedListSorter.Tests.sourcelink.json
