@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using System.Transactions;
@@ -108,26 +109,114 @@ namespace LinkedListSorter.App.LinkedList
             Node sortedSecondHalf = SortAscendingInternal(secondHalf);
 
             // Merge the Sorted Halves
-            return MergedSortedLists(sortedFirstHalf, sortedSecondHalf);
+            return MergedAscending(sortedFirstHalf, sortedSecondHalf);
 
         }
+
 
         // Sort the list in descending order
         public void SortDescending()
         {
-            // TODO: Implement descending sort logic
+            if (head is null || head.Next is null)
+                return;
+            head = SortDescendingInternal(head);
         }
+        public Node SortDescendingInternal(Node node)
+        {
+            // TODO: Implement descending sort logic
+            if (node is null || node.Next is null)
+                return node;
+            
+            Node  middle = GetMiddle(node), nextToMiddle = middle.Next;
+            middle.Next = null;
+
+            Node left = SortDescendingInternal(node), 
+                 right = SortDescendingInternal(nextToMiddle);
+            
+            return MergedDescending(left, right);
+        }
+
         
+
+        // Helper method for finding the middle of the linked list and using
+        // fast and slow pointers
+
         private Node GetMiddle(Node head)
         {
-            throw new NotImplementedException();
+            if (head is null)
+                return null;
+            Node slow = head, fast = head.Next;
+            // Fast pointer moves two steps, slow pointer moves one step
+            // When fast reaches the end, slow is at the middle
+            while (fast.Next is not null && fast.Next.Next is not null)
+            {
+                slow = slow.Next;
+                fast = fast.Next.Next;
+            }
+            return slow;
         }
 
-        private Node MergedSortedLists(Node sortedFirstHalf, Node sortedSecondHalf)
+        // Helper method to merge two sorted lists into one ascending list
+        private Node MergedAscending(Node list1, Node list2)
         {
-            throw new NotImplementedException();
-        }
+            // Create a dummy head for the merged list
+            Node dummyHead = new Node(0);
+            Node current = dummyHead;
 
-        
+            // Iterate while both lists have nodes
+            while (list1 is not null && list2 is not null)
+            {
+                // Compare data and append the smaller node to the merged list
+                if (list1.Data <= list2.Data)
+                {
+                    current.Next = list1;
+                    list1 = list1.Next;
+                }
+                else
+                {
+                    current.Next = list2;
+                    list2 = list2.Next;
+                }
+                current = current.Next;
+            } 
+
+            // Attach the remaining nodes of whichever list is not empty
+            if (list1 is not null)
+                current.Next = list1;
+            if (list2 is not null)
+                current.Next = list2;
+            
+            // The actual head is the next of the dummy node
+            return dummyHead.Next;
+        }        
+
+        private Node MergedDescending(Node left, Node right)
+        {
+            Node dummyHead = new Node(0);
+            Node current = dummyHead;
+
+            while (left is not null && right is not null)
+            {
+                if (left.Data >= right.Data)
+                {
+                    current.Next = left;
+                    left = left.Next;
+                }
+                else
+                {
+                    current.Next = right;
+                    right = right.Next;
+                }
+                current = current.Next;
+
+            }
+
+            if (left is not null)
+                current.Next = left;
+            if (right is not null)
+                current.Next = right;
+            
+            return dummyHead.Next;
+        }
     }
 }
