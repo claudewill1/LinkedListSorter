@@ -67,7 +67,7 @@ namespace LinkedListSorter.App.LinkedList
             else
             {
                 newNode.Previous = tail;
-                tail.Next = newNode;
+                tail!.Next = newNode;
                 tail = newNode;
             }
             
@@ -97,7 +97,7 @@ namespace LinkedListSorter.App.LinkedList
             {
                 // move Head to Head.Next set new Head.Previous to null
                 head = head.Next;
-                head.Previous = null;
+                head!.Previous = null;
             }
             // decrement Count
             count--;       
@@ -112,19 +112,25 @@ namespace LinkedListSorter.App.LinkedList
         /// </summary>
         public bool RemoveLast()
         {
-            // Pseudocode:
-            // if list is empty:
-            //     return false
-            //
-            // if there is only one node:
-            //     set Head and Tail to null
-            // else:
-            //     move Tail to Tail.Previous
-            //     set new Tail.Next to null
-            //
-            // decrement Count
-            // return true
-            return false;
+            
+            
+            // check for empty list, return false if null
+            if (head is null)
+                return false;
+            // check for single node; if true set head and tail to null
+            if (head == tail)
+            {
+                head = null;
+                tail = null;
+            }
+            else
+            {
+                tail = tail!.Previous;
+                tail!.Next = null;
+            }       
+            count--;
+            return true;
+            
         }
 
         /// <summary>
@@ -135,21 +141,41 @@ namespace LinkedListSorter.App.LinkedList
         {
             // Pseudocode:
             // start from Head
-            // while current is not null:
-            //     if current.Data equals value:
-            //         if current is Head:
-            //             call RemoveFirst logic
-            //         else if current is Tail:
-            //             call RemoveLast logic
-            //         else:
-            //             link current.Previous.Next to current.Next
-            //             link current.Next.Previous to current.Previous
-            //         decrement Count
-            //         return true
-            //     move to next node
-            // if value not found, return false
-            return false;
+            DoublyNode? current = head;
+            while (current is not null)
+            {
+                if (current.Data == value)
+                {
+                    // if this is the head node, delegate to RemoveFirst
+                    if (current == head)
+                    {
+                        RemoveFirst();
+                    
+                    }
+                    
+                    // If this is the tail node, delegate to removeLast
+                    if (current == tail)
+                    {
+                        RemoveLast();
+                    }
+                    // Node is in the middle
+                    current.Previous!.Next = current.Next;
+                    current.Next!.Previous = current.Previous;
+                    
+                    count--;
+                    return true;
+                                                
+                }
+                    
+                // move to next node before continuing
+                current = current.Next;   
+            }
+                
+              return false;  
         }
+            
+            
+    
 
         /// <summary>
         /// Returns an array of values by walking from Head to Tail.
@@ -158,12 +184,18 @@ namespace LinkedListSorter.App.LinkedList
         {
             // Pseudocode:
             // create a dynamic list of ints
+            List<int> values = new List<int>();
             // start from Head
-            // while current is not null:
-            //     add current.Data to list
-            //     move to current.Next
-            // convert dynamic list to array and return
-            return Array.Empty<int>();
+            DoublyNode? current = head;
+
+            while (current is not null)
+            {
+                values.Add(current.Data);
+                current = current.Next;
+            }
+            return values.ToArray();
+
+            
         }
 
         /// <summary>
@@ -173,12 +205,15 @@ namespace LinkedListSorter.App.LinkedList
         {
             // Pseudocode:
             // create a dynamic list of ints
-            // start from Tail
-            // while current is not null:
-            //     add current.Data to list
-            //     move to current.Previous
-            // convert dynamic list to array and return
-            return Array.Empty<int>();
+            List<int> values = new List<int>();
+            DoublyNode? current = tail;
+            while (current is not null)
+            {
+                values.Add(current.Data);
+                current = current.Previous;
+            }
+            return values.ToArray();
+            
         }
 
         /// <summary>
@@ -187,43 +222,148 @@ namespace LinkedListSorter.App.LinkedList
         /// </summary>
         public void SortAscending()
         {
-            // Pseudocode option:
-            // 1. Convert list to array using ToArrayForward.
-            // 2. Sort the array with Array.Sort.
-            // 3. Walk the nodes again from Head and copy sorted values back.
-            //
-            // Or fully linked list merge sort:
-            // 1. If list is empty or has one node, return.
-            // 2. Use GetMiddle to split into two halves.
-            // 3. Recursively sort each half.
-            // 4. Merge the two sorted halves into a new sorted list and update Head and Tail.
+            if (head is null || head.Next is null)
+                return;
+            
+            head = MergeSort(head);
+            
+            // Update tail reference
+            DoublyNode? current = head;
+            while (current!.Next is not null)
+                current = current.Next;
+            tail = current;
+        
+        }       
+        private DoublyNode MergeSort(DoublyNode head)
+        {
+            if (head is null || head.Next is null)
+                return head;
+            // Find the middle of the list
+            DoublyNode middle = GetMiddle(head), secondHalf = middle.Next;
+            middle.Next = null;
+            if (secondHalf is not null)
+                secondHalf.Previous = null;
+            // Recursively sort the two halves
+            DoublyNode left = MergeSort(head),
+                right = MergeSort(secondHalf!); 
+            // Merge the sorted halves
+            return MergeSortedLists(left, right);
+    // Break list into two independent lists
         }
+
+        private DoublyNode MergeSortedLists(DoublyNode left, DoublyNode right)
+        {
+            
+            DoublyNode result = null!, current = null!; 
+            if (left is null)
+                return right;
+            if (right is null)
+                return left;
+            
+            // Choose smaller head value
+            if (left.Data <= right.Data)
+            {
+                result = left;
+                left = left.Next!;
+            }
+            else
+            {
+                result = right;
+                right = right.Next!;
+            }
+            current = result;
+            current.Previous = null;
+
+            // Merge remaining nodes
+            while (left is not null && right is not null)
+            {
+                if (left.Data <= right.Data)
+                {
+                    current.Next = left;
+                    left.Previous = current;
+                    current = left;
+                    left = left.Next!;
+                }
+                else
+                {
+                    current.Next = right;
+                    right.Previous = current;
+                    current = right;
+                    right = right.Next!;
+                }
+            }
+            // Append remaining nodes
+            if (left is not null)
+            {
+                current.Next = left;
+                left.Previous = current;
+            }
+            else if (right is not null)
+            {
+                current.Next = right;
+                right.Previous = current;
+            }
+            return result;
+        }
+
+
+        private DoublyNode GetMiddle(DoublyNode head)
+        {
+            DoublyNode slow = head, fast = head;
+            while (fast.Next is not null && fast.Next.Next is not null)
+            {
+                slow = slow.Next!;
+                fast = fast.Next.Next;
+            }
+            return slow;
+        }
+    public void SortDescending()
+        {
+            // Pseudocode option:
+            if (head is null || head.Next is null)
+                return;
+            // 1. Call SortAscending to get ascending order.
+            SortAscending();
+            
+            // 2. Reverse the list.
+
+            DoublyNode? current = head;
+            DoublyNode? temp = null;
+            while (current is not null)
+            {
+                // swap next and previous 
+                temp = current.Previous;
+                current.Previous = current.Next;
+                current.Next = temp;
+                // move to next node (which is previous before swap)
+                current = current.Previous;
+            }
+            // After reversing, temp holds the last swapped node
+            // which is the new head
+            if (temp is not null)
+                head = temp.Previous;
+                        
+            // Update tail reference
+            current = head;
+            while (current!.Next is not null)
+                current = current.Next;
+            tail = current;
+        }
+
 
         /// <summary>
         /// Sorts the list values in descending order.
         /// </summary>
-        public void SortDescending()
-        {
-            // Pseudocode option:
-            // 1. Call SortAscending to get ascending order.
-            // 2. Reverse the list by swapping Next and Previous for each node
-            //    and swapping Head and Tail.
-            //
-            // Or:
-            // 1. Convert to array.
-            // 2. Sort ascending, then reverse the array.
-            // 3. Write values back into the list nodes.
-        }
+        
 
         /// <summary>
         /// Helper to clear the list. Optional for tests or reuse.
         /// </summary>
         public void Clear()
         {
-            // Pseudocode:
-            // set Head and Tail to null
-            // set Count to 0
-            // let garbage collector reclaim nodes
+            head = null;
+            tail = null;
+            count = 0;
         }
     }
 }
